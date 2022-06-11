@@ -135,7 +135,9 @@ public:
         }
     }
     string dibujarTablero() {
+        system("CLS");
         stringstream ss;
+        // ss << "   0     1     2     3     4     5     6     7   " << endl;
         ss << "_________________________________________________" << endl;
         ss << "|     |     |     |     |     |     |     |     |" << endl;
         for (int i = 0; i < filas; i++) {
@@ -160,7 +162,7 @@ public:
     }
     //Metodos para el juego
     //x = columna, y = fila
-    bool validarMovimiento(int x1, int y1, int x2, int y2) {\
+    bool validarMovimiento(int x1, int y1, int x2, int y2) {
         bool esValido = false;
         if (tablero[x1][y1].getColor() == blanco) {
             if (x2 - x1 == 1 && y2 - y1 == 1) {
@@ -181,6 +183,15 @@ public:
         }
         return esValido;
     }
+    bool moverFicha(int x1, int y1, int x2, int y2) {
+        bool movimientoValido = validarMovimiento(x1,y1,x2,y2);
+        if(movimientoValido){
+            tablero[x2][y2] = tablero[x1][y1];
+            tablero[x1][y1].setColor(ninguno);
+            tablero[x1][y1].setActiva(false);
+        }
+        return movimientoValido;
+    }
 };
 
 int main() {
@@ -190,6 +201,13 @@ int main() {
     //fila 4, columna 6
     // tablero.setFicha(4, 6, ficha1);
     cout << tablero.dibujarTablero();
+
+    cout << tablero.validarMovimiento(5, 1, 4, 1);
+    if (tablero.moverFicha(5, 1, 4, 1)) {
+        cout << tablero.dibujarTablero();
+    } else {
+        cout << "Movimiento invalido" << endl;
+    }
     
 
     return 0;

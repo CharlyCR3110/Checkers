@@ -86,6 +86,51 @@ public:
         }
         return ss.str();
     }
+    void colocarFichas() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < filas; j++) {
+                if (i % 2 == 0) {
+                    if (j % 2 == 0) {
+                        tablero[i][j].setColor(blanco);
+                        tablero[i][j].setActiva(true);
+                    } else {
+                        tablero[i][j].setColor(ninguno);
+                        tablero[i][j].setActiva(false);
+                    }
+                } else {
+                    if (j % 2 == 0) {
+                        tablero[i][j].setColor(ninguno);
+                        tablero[i][j].setActiva(false);
+                    } else {
+                        tablero[i][j].setColor(blanco);
+                        tablero[i][j].setActiva(true);
+                    }
+                }
+            }
+        }
+        for (int i = 5; i < columnas; i++) {
+            for (int j = 0; j < filas; j++) {
+                if (i % 2 == 0) {
+                    if (j % 2 == 0) {
+                        tablero[i][j].setColor(negro);
+                        tablero[i][j].setActiva(true);
+                    } else {
+                        tablero[i][j].setColor(ninguno);
+                        tablero[i][j].setActiva(false);
+                    }
+                } else {
+                    if (j % 2 == 0) {
+                        tablero[i][j].setColor(ninguno);
+                        tablero[i][j].setActiva(false);
+                    } else {
+                        tablero[i][j].setColor(negro);
+                        tablero[i][j].setActiva(true);
+                    }
+                }
+            }
+        }
+
+    }
     string dibujarTablero() {
         stringstream ss;
         ss << "_________________________________________________" << endl;
@@ -115,37 +160,8 @@ public:
 
 int main() {
     Tablero tablero;
-    tablero.setFilas(maximoFilasTablero);
-    tablero.setColumnas(maximoColumnasTablero);
-    Ficha ficha1(blanco, true);
-    Ficha ficha2(blanco, true);
+    tablero.colocarFichas();
 
-    tablero.setFicha(0, 0, ficha1);
-    tablero.setFicha(0, 1, ficha2);
-    tablero.setFicha(0, 2, ficha1);
-    tablero.setFicha(0, 3, ficha2);
-    tablero.setFicha(0, 4, ficha1);
-    tablero.setFicha(0, 5, ficha2);
-    tablero.setFicha(0, 6, ficha1);
-    tablero.setFicha(0, 7, ficha2);
-    tablero.setFicha(1, 0, ficha1);
-    tablero.setFicha(1, 1, ficha2);
-    tablero.setFicha(1, 2, ficha1);
-    tablero.setFicha(1, 3, ficha2);
-    tablero.setFicha(1, 4, ficha1);
-    tablero.setFicha(1, 5, ficha2);
-    tablero.setFicha(1, 6, ficha1);
-    tablero.setFicha(1, 7, ficha2);
-    tablero.setFicha(2, 0, ficha1);
-    tablero.setFicha(2, 1, ficha2);
-    tablero.setFicha(2, 2, ficha1);
-    tablero.setFicha(2, 3, ficha2);
-    tablero.setFicha(2, 4, ficha1);
-    tablero.setFicha(2, 5, ficha2);
-    tablero.setFicha(2, 6, ficha1);
-    tablero.setFicha(2, 7, ficha2);
-    tablero.setFicha(3, 0, ficha1);
-    tablero.setFicha(3, 1, ficha2);
 
     
     cout << tablero.dibujarTablero();

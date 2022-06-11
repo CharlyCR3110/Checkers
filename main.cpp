@@ -61,14 +61,16 @@ public:
     void setFicha(int x, int y, Ficha ficha) {
         tablero[x][y] = ficha;
     }
-    Ficha getFicha(int x, int y) {
-        return tablero[x][y];
-    }
     void setFilas(int filas) {
         this->filas = filas;
     }
     void setColumnas(int columnas) {
         this->columnas = columnas;
+    }
+    //getters
+    //devuelve una ficha en la posicion x,y
+    Ficha getFicha(int x, int y) {
+        return tablero[x][y];
     }
     int getFilas() {
         return filas;
@@ -87,6 +89,7 @@ public:
         return ss.str();
     }
     void colocarFichas() {
+        //Coloca las fichas blancas
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < filas; j++) {
                 if (i % 2 == 0) {
@@ -108,6 +111,7 @@ public:
                 }
             }
         }
+        //Coloca las fichas negras
         for (int i = 5; i < columnas; i++) {
             for (int j = 0; j < filas; j++) {
                 if (i % 2 == 0) {
@@ -129,7 +133,6 @@ public:
                 }
             }
         }
-
     }
     string dibujarTablero() {
         stringstream ss;
@@ -154,17 +157,40 @@ public:
             }
         }
         return ss.str();
-    }   
-
+    }
+    //Metodos para el juego
+    //x = columna, y = fila
+    bool validarMovimiento(int x1, int y1, int x2, int y2) {\
+        bool esValido = false;
+        if (tablero[x1][y1].getColor() == blanco) {
+            if (x2 - x1 == 1 && y2 - y1 == 1) {
+                esValido = true;
+            } else if (x2 - x1 == 1 && y2 - y1 == -1) {
+                esValido = true;
+            } else {
+                esValido = false;
+            }
+        } else if (tablero[x1][y1].getColor() == negro) {
+            if (x2 - x1 == -1 && y2 - y1 == 1) {
+                esValido = true;
+            } else if (x2 - x1 == -1 && y2 - y1 == -1) {
+                esValido = true;
+            } else {
+                esValido = false;
+            }
+        }
+        return esValido;
+    }
 };
 
 int main() {
     Tablero tablero;
     tablero.colocarFichas();
-
-
-    
+    Ficha ficha1(negro, true);
+    //fila 4, columna 6
+    // tablero.setFicha(4, 6, ficha1);
     cout << tablero.dibujarTablero();
+    
 
     return 0;
 }

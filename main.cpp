@@ -135,11 +135,20 @@ public:
         }
     }
     string dibujarTablero() {
-        system("CLS");
+//        system("CLS");
         stringstream ss;
-        // ss << "   0     1     2     3     4     5     6     7   " << endl;
-        ss << "_________________________________________________" << endl;
-        ss << "|     |     |     |     |     |     |     |     |" << endl;
+        for (int i = 0; i < 49; i++) {
+            ss << "_";
+        }
+        ss << endl;
+        for (int i = 0; i <= 50; i++) {
+            if (i % 6 == 0){
+                ss << "|";
+            } else {
+                ss << " ";
+            }
+        }
+        ss << endl;
         for (int i = 0; i < filas; i++) {
             // ss << "| " <<endl;
             ss << "| ";
@@ -153,11 +162,22 @@ public:
                 }
             }
             ss << endl;
-            ss << "|_____|_____|_____|_____|_____|_____|_____|_____|" << endl;\
-            if (i != 7) {
-                ss << "|     |     |     |     |     |     |     |     |" << endl;
+            for (int k = 0; k < 50 / 6; k++) {
+                ss << "|_____";
+            }
+            ss << "|";
+            ss << endl;
+            // ss << "|_____|_____|_____|_____|_____|_____|_____|_____|" << endl;
+            if (i != filas - 1) {
+                for (int k = 0; k <= 50 / 6; k++) {
+                    ss << "|     ";
+                }
+                ss << endl;
             }
         }
+            // if (i != 7) {
+            //     ss << "|     |     |     |     |     |     |     |     |" << endl;
+            // }
         return ss.str();
     }
     //Metodos para el juego
@@ -183,7 +203,8 @@ public:
         }
         return esValido;
     }
-    bool moverFicha(int x1, int y1, int x2, int y2) {
+    //devuelve un bool para saber si se puede mover o no
+    bool moverFichaV0(int x1, int y1, int x2, int y2) {
         bool movimientoValido = validarMovimiento(x1,y1,x2,y2);
         if(movimientoValido){
             tablero[x2][y2] = tablero[x1][y1];
@@ -202,13 +223,11 @@ int main() {
     // tablero.setFicha(4, 6, ficha1);
     cout << tablero.dibujarTablero();
 
-    cout << tablero.validarMovimiento(5, 1, 4, 1);
-    if (tablero.moverFicha(5, 1, 4, 1)) {
+    cout << tablero.validarMovimiento(5, 1, 4, 1) << endl;
+    if (tablero.moverFichaV0(5, 1, 4, 2)) {
         cout << tablero.dibujarTablero();
     } else {
         cout << "Movimiento invalido" << endl;
     }
-    
-
     return 0;
 }

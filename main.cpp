@@ -201,6 +201,11 @@ public:
                 esValido = false;
             }
         }
+        if(tablero[x2][y2].getActiva() == true){
+            esValido = false;
+        } else {
+            esValido = true;
+        }
         return esValido;
     }
     //devuelve un bool para saber si se puede mover o no
@@ -225,6 +230,16 @@ int main() {
 
     cout << tablero.validarMovimiento(5, 1, 4, 1) << endl;
     if (tablero.moverFichaV0(5, 1, 4, 2)) {
+        cout << tablero.dibujarTablero();
+    } else {
+        cout << "Movimiento invalido" << endl;
+    }
+    if (tablero.moverFichaV0(4, 2, 3, 3)) {
+        cout << tablero.dibujarTablero();
+    } else {
+        cout << "Movimiento invalido" << endl;
+    }
+    if (tablero.moverFichaV0(3, 3, 2, 4)) {
         cout << tablero.dibujarTablero();
     } else {
         cout << "Movimiento invalido" << endl;
